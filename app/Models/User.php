@@ -47,7 +47,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    // metoda za čuvanje novog korisnika
     public function saveUser($fname, $lname, $email, $pass){
         $data = DB::table('users')->insert([
             'fname' => $this->sanitizeString($fname),
