@@ -13,6 +13,7 @@ class UserController extends Controller
         $this->user = new User();
     }
 
+    // registracija korisnika
     public function registerUser(Request $request){
         // provera da li su svi podaci uneti, ako nisu biće prazan string
         $fname = (isset($request->fname)) ? $request->fname : '';
@@ -35,6 +36,24 @@ class UserController extends Controller
         } else {
             // ovde će se nastaviti upis podataka
             $data = $this->user->saveUser($fname, $lname, $email, $pass);
+            return $data;
+        }
+    }
+
+    // logovanje korisnika
+    public function loginUser(Request $request){
+        $username = (isset($request->username)) ? $request->username : '';
+        $password = (isset($request->password)) ? $request->password : '';
+
+        if(
+            strlen($username) == 0 || 
+            strlen($password) == 0
+        ) {
+            // ovde će vratiti greška
+            return false;
+        } else {
+            // ovde će se nastaviti upis podataka
+            $data = $this->user->loginUser($username, $password);
             return $data;
         }
     }

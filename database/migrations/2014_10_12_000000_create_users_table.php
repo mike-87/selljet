@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email');
             $table->string('password');
             $table->enum('role', ['1', '2', '3'])->default('3')->comment('1 - root; 2 - admin; 3 - user');
+            $table->enum('status', ['0', '1'])->default('1')->comment('0 - inactive; 1 - active');
             $table->timestamp('created_at')->useCurrent();
         });
     }

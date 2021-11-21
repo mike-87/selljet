@@ -146,7 +146,9 @@ ul.CTAs a {
 .email-remove,
 .pass-remove,
 .repeatPass-remove,
-.matchPass-remove {
+.matchPass-remove,
+.username-remove,
+.password-remove {
     display: none;
 }
 

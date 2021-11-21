@@ -9,7 +9,7 @@
             
                     <ul class="nav navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link login" href="javascript:void(0)">Prijava</a>
+                            <a class="nav-link loginUser" href="javascript:void(0)">Prijava</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link registerUser" href="javascript:void(0)">Registracija</a>
@@ -39,5 +39,6 @@
     </div>
     <!-- Modals -->
     @include('modals.registerModal')
+    @include('modals.loginModal')
 </div>
 @include('core.footer')

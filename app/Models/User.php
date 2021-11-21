@@ -49,12 +49,19 @@ class User extends Authenticatable
 
     // metoda za čuvanje novog korisnika
     public function saveUser($fname, $lname, $email, $pass){
-        $data = DB::table('users')->insert([
-            'fname' => $this->sanitizeString($fname),
-            'lname' => $this->sanitizeString($lname),
-            'email' => $this->sanitizeString($email),
-            'password' => Hash::make($pass)
-        ]);
+        // provera da li je email već unet
+        $userCheck = DB::table('users')->where('email', $this->sanitizeString($email))->count();
+
+        if($userCheck == 0){
+            $data = DB::table('users')->insert([
+                'fname' => $this->sanitizeString($fname),
+                'lname' => $this->sanitizeString($lname),
+                'email' => $this->sanitizeString($email),
+                'password' => Hash::make($pass)
+            ]);
+        } else {
+            $data = 'email';
+        }
 
         return $data;
     }
@@ -68,5 +75,15 @@ class User extends Authenticatable
         $string = preg_replace("/-/", '&hyphen;', $string);
 
         return $string;
+    }
+
+    public function loginUser($email, $password){
+        $userCheck = DB::table('users')->where('email', $this->sanitizeString($email))->first();
+
+        if(is_null($userCheck)){
+            return 'unknownUser';
+        } else {
+            return true;
+        }
     }
 }

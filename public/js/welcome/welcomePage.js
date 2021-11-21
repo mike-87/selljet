@@ -4,6 +4,7 @@ $.ajaxSetup({
     }
 });
 
+        /* REGISTER START */
 $(".registerUser").click(function(){
     $("#registerModal").modal('show');
 });
@@ -12,8 +13,6 @@ $(".closeRegister").click(function(){
     clearRegistrationForm();
     $("#registerModal").modal('hide');
 });
-
-
 
 $(".submitRegister").click(function(){
     if(validateFrom() === false){
@@ -43,6 +42,12 @@ $(".submitRegister").click(function(){
                     text: 'Uspešno ste se registrovali. Možete se prijaviti sa email adresom i šifrom koju ste uneli prilikom registracije.',
                 })
                 $("#registerModal").modal('hide');
+            } else if(response == 'email') {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Obaveštenje',
+                    text: 'Postoji nalog sa unetom email adresom.',
+                })
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -168,3 +173,71 @@ $("#repeatPass").keyup(function() {
   $('span.repeatPass-remove').hide();
   $('span.matchPass-remove').hide();
 });
+        /* REGISTER END */
+
+        /* LOGIN START */
+$(".loginUser").click(function(){
+    $("#loginModal").modal('show');
+});
+
+$(".closeLogin").click(function(){
+    clearRegistrationForm();
+    $("#registerModal").modal('hide');
+});
+
+// sklanja upozorenja za registraciju
+function hideLoginValidationMessages(){
+    $('span.username-remove').hide();
+    $('span.password-remove').hide();
+}
+
+// funckija koja prazni sva polja na registracionoj formi
+function clearLoginForm(){
+    hideLoginValidationMessages();
+    $('#username').val('');
+    $('#password').val('');
+}
+
+function validateLoginForm(){
+    var loginErrorCounter = 0;
+
+    if(loginErrorCounter > 0){
+        return false;
+    }
+
+    return true;
+}
+
+$(".submitLogin").click(function(){
+    if(validateLoginForm() === false){
+        Swal.fire({
+            icon: 'error',
+            title: 'Greška',
+            text: 'Ispravno popunite sva neophodna polja i pokušajte ponovo.',
+        })
+    } else {
+        // prosleđuje podatke za registraciju
+        $.ajax({
+        type: 'POST',
+        url: '/loginUser',
+        data: {
+            username: $('#username').val(),
+            password: $('#password').val()
+        }
+        }).done(function(response) {
+            console.log(response, 'response');
+            if(response == 'unknownUser'){
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Obaveštenje',
+                    text: 'Netačno korisničko ime i/ili šifra. Pokušajte ponovo.',
+                })
+                //$("#registerModal").modal('hide');
+            } else {
+                console.log('sve je OK');
+            }
+     });
+    }
+});
+
+        /* LOGIN END */
