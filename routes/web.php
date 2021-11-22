@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,25 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(is_null(session('user'))){
+        return view('welcome');
+    } else {
+        return view('home');
+    }
+    //return view('welcome');
 });
 
 Route::post('/registerUser', [UserController::class, 'registerUser']);
 Route::post('/loginUser', [UserController::class, 'loginUser']);
+
+Route::get('/home', function () {
+    //dd(session('user'),'ses');
+    if(is_null(session('user'))){
+        return view('welcome');
+    } else {
+        return view('home', ['user' => session('user')]);
+    }
+    
+});
+
+Route::get('/logout', [UserController::class, 'logout']);

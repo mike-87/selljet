@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use DB;
 
 class User extends Authenticatable
@@ -83,7 +85,16 @@ class User extends Authenticatable
         if(is_null($userCheck)){
             return 'unknownUser';
         } else {
-            return true;
+            // provera da li je dobra kombinacija username/password
+            if(Auth::attempt(
+                array('email' => $this->sanitizeString($email), 'password' => $password)
+                )
+            ){
+                Session::put('user', $userCheck);
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

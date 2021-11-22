@@ -230,11 +230,18 @@ $(".submitLogin").click(function(){
                 Swal.fire({
                     icon: 'warning',
                     title: 'Obaveštenje',
-                    text: 'Netačno korisničko ime i/ili šifra. Pokušajte ponovo.',
+                    text: 'Korisnik ne postoji. Pokušajte ponovo.',
                 })
                 //$("#registerModal").modal('hide');
+            } else if (response === false) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Obaveštenje',
+                    text: 'Netačno korisničko ime i/ili šifra. Pokušajte ponovo.',
+                })
             } else {
-                console.log('sve je OK');
+                //window.location.replace("{{route('welcome-home')}}");
+                window.location.href = "home";
             }
      });
     }

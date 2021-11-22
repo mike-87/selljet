@@ -1,7 +1,7 @@
 <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Sell jet</h3>
+            <a href="/home"><h3>Sell jet</h3></a>
         </div>
         <ul class="list-unstyled components">
             <li class="active">

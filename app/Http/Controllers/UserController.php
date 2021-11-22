@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use App\Models\User;
 
 class UserController extends Controller
@@ -54,7 +57,13 @@ class UserController extends Controller
         } else {
             // ovde će se nastaviti upis podataka
             $data = $this->user->loginUser($username, $password);
-            return $data;
+            return response()->json($data, 200);
         }
+    }
+
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect('/');
     }
 }
