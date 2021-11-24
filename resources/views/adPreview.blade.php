@@ -11,11 +11,12 @@
                 <a class="btn btn-warning me-2" href="{{ url('/home') }}" role="button">Početna</a>
 
                 <a class="btn btn-success adPost me-2" href="javascript:void(0)" role="button">Dodaj oglas</a>
-
+                
               <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 {{ $user->fname}} {{$user->lname}}
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Dodaj oglas</a></li>
                 <li><a class="dropdown-item" href="#">Moji oglasi</a></li>
                 <li><a class="dropdown-item" href="#">Moj profil</a></li>
                 @if($user->role == 1)
@@ -25,32 +26,18 @@
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="{{ url('/logout') }}">Odjava</a></li>
               </ul>
-              
             </div>
                 
         </nav>
 
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach($ads as $ad)
-        <div class="col">
-            <div class="card card-style">
-                <img src="{{asset('images/')}}/{{$ad->image}}" class="card-img-top" alt="img">
-                <div class="card-body">
-                    <h5 class="card-title">{{$ad->title}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{$ad->name}}</h6>
-                    <p class="card-text">{{substr($ad->description, 0, 40)}}...</p>
-                    <p class="card-text"><b>Postavljeno:</b> {{date('d. m. Y', strtotime($ad->created_at))}} u {{date('H.i', strtotime($ad->created_at))}}h</p>
-                    <a href="/ad/preview/{{$ad->ads_id}}" class="btn btn-primary">Detaljnije</a>
-                </div>
-            </div>
-        </div>
-
-        @endforeach
-        </div>
-        <div class="row mt-5">
-           <div class="d-flex justify-content-end">
-                {{$ads->links()}}
-            </div> 
+        <h2>{{$adData->title}}</h2>
+        <p><b>Oglas postavio:</b> {{$adData->fname}} {{$adData->lname}}</p>
+        <p><b>Postavljeno:</b> {{date('d. m. Y', strtotime($adData->created_at))}} u {{date('H.i', strtotime($adData->created_at))}}h</p>
+        <p><b>Lokacija:</b> {{$adData->location}}</p>
+        <p><b>Kontakt telefon:</b> {{$adData->phone}}</p>
+        <p><b>Opis:</b> <br>{{$adData->description}}</p>
+        <div class="d-flex justify-content-center">
+            <img class="bigger" src="{{asset('images/')}}/{{$adData->image}}">
         </div>
         
     </div> 

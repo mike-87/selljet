@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Session;
 
 /*
@@ -15,26 +17,19 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
-    if(is_null(session('user'))){
-        return view('welcome');
-    } else {
-        return view('home');
-    }
-    //return view('welcome');
-});
+// default ruta
+Route::get('/', [UserController::class, 'welcomeScreen']);
 
+// rute za registraciju i logovanje
 Route::post('/registerUser', [UserController::class, 'registerUser']);
 Route::post('/loginUser', [UserController::class, 'loginUser']);
-
-Route::get('/home', function () {
-    //dd(session('user'),'ses');
-    if(is_null(session('user'))){
-        return view('welcome');
-    } else {
-        return view('home', ['user' => session('user')]);
-    }
-    
-});
-
+Route::get('/home', [UserController::class, 'homeScreen']);
 Route::get('/logout', [UserController::class, 'logout']);
+
+// rute za oglase
+Route::get('/ad/preview/{id}', [AdController::class, 'adPreview']);
+Route::get('/ads/category/{id}', [AdController::class, 'adCategory']);
+Route::post('/adPost', [AdController::class, 'saveAd']);
+
+// rute za kategorije
+Route::get('/categoryChildren/{id}', [CategoryController::class, 'getChildCategories']);

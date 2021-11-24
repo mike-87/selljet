@@ -14,6 +14,12 @@ $(".closeRegister").click(function(){
     $("#registerModal").modal('hide');
 });
 
+$(".closeLogin").click(function(){
+    $("#username").val('');
+    $("#password").val('');
+    $("#loginModal").modal('hide');
+});
+
 $(".submitRegister").click(function(){
     if(validateFrom() === false){
         Swal.fire({
@@ -147,12 +153,12 @@ function validateFrom(){
     return true;
 }
 
+// zatvaranje modala i čišćenje
 $('#registerModal').on('shown.bs.modal', function () {
   clearRegistrationForm();
-
 });
 
-
+// brisanje grešaka nakon ponovnog unosa
 $("#fname").keyup(function() {
   $('span.fname-remove').hide();
 });

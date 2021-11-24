@@ -79,6 +79,7 @@ class User extends Authenticatable
         return $string;
     }
 
+    // provera za login i logovanje
     public function loginUser($email, $password){
         $userCheck = DB::table('users')->where('email', $this->sanitizeString($email))->first();
 

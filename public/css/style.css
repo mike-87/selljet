@@ -122,13 +122,17 @@ ul.CTAs {
     padding: 20px;
 }
 
-ul.CTAs a {
-    text-align: center;
+a.item-indent {
+    padding-left: 3.0em !important;
+}
+
+/*ul.CTAs a {
+    text-align: right;
     font-size: 0.9em !important;
     display: block;
     border-radius: 5px;
     margin-bottom: 5px;
-}
+}*/
 
 /* ---------------------------------------------------
     CONTENT STYLE
@@ -148,7 +152,12 @@ ul.CTAs a {
 .repeatPass-remove,
 .matchPass-remove,
 .username-remove,
-.password-remove {
+.password-remove,
+.section-remove,
+.category-remove,
+.subcategory-remove,
+.sectionCategory,
+.sectionSubcategory {
     display: none;
 }
 
@@ -164,11 +173,27 @@ footer > p {
 	color: black;
 }
 
+img.smaller {
+    width: 350px;
+    height: 300px;
+}
+
+img.bigger {
+    width: 650px;
+    height: 600px;
+}
+
+div.card-style {
+    /*width: 30em;*/
+    height: 38em;
+    display: inline-block;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
 
-@media (max-width: 768px) {
+/*@media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;
     }
@@ -177,5 +202,5 @@ footer > p {
     }
     #sidebarCollapse span {
         display: none;
-    }
+    }*/
 }

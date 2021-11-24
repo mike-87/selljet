@@ -13,6 +13,7 @@
 
     <!-- Custom JS -->
     <script src="{{ asset('js/welcome/welcomePage.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('js/home/homePage.js') }}" type="text/javascript"></script>
 
 </body>
 
